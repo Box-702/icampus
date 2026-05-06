@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+﻿import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { fileURLToPath, URL } from 'node:url'
 
@@ -17,6 +17,17 @@ export default defineConfig({
         target: 'http://localhost:8080',
         changeOrigin: true,
         ws: true
+      }
+    }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'element-plus': ['element-plus'],
+          'element-icons': ['@element-plus/icons-vue'],
+          'vendor': ['vue', 'vue-router', 'pinia', 'axios', 'marked', 'dompurify']
+        }
       }
     }
   }

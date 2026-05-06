@@ -1,8 +1,10 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+﻿import { createRouter, createWebHashHistory } from 'vue-router'
 import LoginView from '@/views/LoginView.vue'
 import MainLayout from '@/layouts/MainLayout.vue'
 import ChatView from '@/views/ChatView.vue'
 import ProfileView from '@/views/ProfileView.vue'
+import { useUserStore } from '@/stores/user'
+
 const routes = [
   { path: '/login', component: LoginView },
   {
@@ -23,12 +25,13 @@ const router = createRouter({
 })
 
 router.beforeEach((to, _, next) => {
-  const token = localStorage.getItem('campus_ai_token')
-  const username = localStorage.getItem('campus_ai_username')
+  // Pinia must be used inside the guard (after app initialization)
+  const userStore = useUserStore()
   const requiresAuth = to.matched.some(r => r.meta?.requiresAuth)
-  if (requiresAuth && (!token || !username)) {
+
+  if (requiresAuth && !userStore.isLoggedIn) {
     next('/login')
-  } else if (to.path === '/login' && token && username) {
+  } else if (to.path === '/login' && userStore.isLoggedIn) {
     next('/')
   } else {
     next()

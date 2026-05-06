@@ -20,10 +20,6 @@
             <span>AI对话</span>
           </el-menu-item>
           <el-menu-item index="/profile">
-            <el-icon><Notebook /></el-icon>
-            <span>学生手册</span>
-          </el-menu-item>
-          <el-menu-item index="/profile">
             <el-icon><User /></el-icon>
             <span>个人</span>
           </el-menu-item>
@@ -61,7 +57,7 @@ import { computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { ElMessageBox } from 'element-plus'
 import {
-  ChatDotRound, Notebook, User, ArrowDown, SwitchButton
+  ChatDotRound, User, ArrowDown, SwitchButton
 } from '@element-plus/icons-vue'
 
 const router = useRouter()
